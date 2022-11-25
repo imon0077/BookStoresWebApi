@@ -1,10 +1,18 @@
 using BookStoresWebApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using NuGet.DependencyResolver;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("BookStoresDB");
+
+
+builder.Services.AddMvc(option => option.EnableEndpointRouting = false)
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
 builder.Services.AddDbContext<BookStoresDBContext>(options =>
     options.UseSqlServer(connectionString));

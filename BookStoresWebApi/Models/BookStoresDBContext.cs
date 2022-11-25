@@ -348,6 +348,8 @@ namespace BookStoresWebApi.Models
                     .HasColumnName("hire_date")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.JobId).HasColumnName("job_id");
+
                 entity.Property(e => e.LastName)
                     .HasMaxLength(30)
                     .IsUnicode(false)
@@ -376,6 +378,11 @@ namespace BookStoresWebApi.Models
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("source");
+
+                entity.HasOne(d => d.Job)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.JobId)
+                    .HasConstraintName("FK_User_Job");
 
                 entity.HasOne(d => d.Pub)
                     .WithMany(p => p.Users)
