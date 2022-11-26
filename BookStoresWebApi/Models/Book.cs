@@ -22,7 +22,7 @@ namespace BookStoresWebApi.Models
         public string? Notes { get; set; }
         public DateTime PublishedDate { get; set; }
 
-        public virtual Publisher Pub { get; set; } = null!;
+        public virtual Publisher? Pub { get; set; } = null!;
         public virtual ICollection<BookAuthor> BookAuthors { get; set; }
         public virtual ICollection<Sale> Sales { get; set; }
     }
